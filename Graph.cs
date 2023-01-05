@@ -39,6 +39,7 @@ public class Graph
 
     public void DepthFirstTraverse(int startingVertexIndex)
     {
+        // following code uses a stack to depth-first traverse and print this graph
         bool[] wasPushed = new bool[MAX_VERTS];
         
         Stack<Int32> traverseStack = new Stack<Int32>();
@@ -54,7 +55,7 @@ public class Graph
             
             for (int i = 0; i < MAX_VERTS; i++)
             {
-                if (adjMatrix[currentVertexIndex, i] < 0 && wasPushed[i] == false)
+                if (adjMatrix[currentVertexIndex, i] > 0 && wasPushed[i] == false)
                 {
                     traverseStack.Push(i);
                     Console.WriteLine(i);
