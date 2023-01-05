@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 public class Graph
 {
     private readonly int MAX_VERTS = 10;
@@ -32,6 +35,41 @@ public class Graph
     public void AddEdge(int start, int end, int weight)
     {
         adjMatrix[start, end] = weight;
+    }
+
+    public void DepthFirstTraverse(int startingVertexIndex)
+    {
+        bool[] wasPushed = new bool[MAX_VERTS];
+        
+        Stack<Int32> traverseStack = new Stack<Int32>();
+
+        traverseStack.Push(startingVertexIndex);
+        Console.WriteLine(startingVertexIndex);
+        wasPushed[startingVertexIndex] = true; 
+
+        while (traverseStack.Count != 0)
+        {
+            int currentVertexIndex = traverseStack.Peek();
+            bool noEdges = true;
+            
+            for (int i = 0; i < MAX_VERTS; i++)
+            {
+                if (adjMatrix[currentVertexIndex, i] < 0 && wasPushed[i] == false)
+                {
+                    traverseStack.Push(i);
+                    Console.WriteLine(i);
+                    wasPushed[i] = true;
+                    noEdges = false;
+                    break;
+                }
+            }
+
+            if (noEdges)
+            {
+                traverseStack.Pop();
+            }
+        }
+
     }
 
     public void PrintVertex(int index)
